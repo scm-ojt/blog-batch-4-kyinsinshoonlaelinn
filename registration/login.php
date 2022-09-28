@@ -12,8 +12,8 @@
 <div class="wrapper"> 
    <form method="POST" action="login.php" class="form-signin">
       <h2 class="form-signin-heading">Please Login</h2>
-      <?php include('errors.php'); ?>
-      <input type="text" class="form-control" name="email" placeholder="Enter Your Email" required="" autofocus="" />
+      <?php include('../common/errors.php'); ?>
+      <input type="text" class="form-control" name="email" placeholder="Enter Your Email" required="" autofocus="" value="<?php echo $email; ?>"/>
       <input type="password" class="form-control" name="password" placeholder="Enter Password" required=""/>      
       <label class="checkbox">
       <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
