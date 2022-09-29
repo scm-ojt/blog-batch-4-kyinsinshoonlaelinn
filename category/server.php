@@ -40,3 +40,16 @@ if (isset($_POST['reg_category'])) {
   	header('location: ../registration/index.php');
   }
 }
+  // Update category
+  if (isset($_POST['edit_category'])) {
+    $dt = new DateTime("now", new DateTimeZone('Asia/Yangon'));
+    $updated_date = $dt->format('Y.m.d , h:i:s');
+    //update category if there are no errors in the form
+    if (count($errors) == 0) {
+      $query = "UPDATE categories SET category_name= '".$_POST['category_name']."', updated_date = '".$updated_date."' WHERE id='".$_POST['id']."'";
+      mysqli_query($db, $query);
+      header('location: category.php');
+    }
+}
+
+?>

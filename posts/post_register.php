@@ -1,5 +1,5 @@
 <?php include('server.php') ?>
-<?php include('../categories/fetch_category.php') ?>
+<?php include('../category/fetch_category.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +13,12 @@
 	
   <form method="post" action="post_register.php" enctype="multipart/form-data">
     <?php include('../common/errors.php'); ?>
-    <select name="categoryList" multiple="multiple">
-        <option>Categories</option>
+    <select name="categoryList[]" multiple="multiple">
+        <option value="">Categories</option>
         <?php 
         foreach ($options as $option) {
         ?>
-        <option><?php echo $option['category_name']; ?> </option>
+        <option value="<?php echo $option['id']; ?>"><?php echo $option['category_name']; ?> </option>
         <?php 
     }
    ?>
@@ -26,7 +26,7 @@
     <br><br>
   	<div class="">
   	  <label>Image Upload:</label>
-  	  <input type="file" name="image" value="<?php echo $image; ?>">
+  	  <input type="file" name="image">
   	</div>
   	<div class="input-group">
   	  <label>Title:</label>
