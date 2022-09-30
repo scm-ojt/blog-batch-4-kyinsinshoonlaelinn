@@ -5,6 +5,16 @@
 <head>
   <title>Post Create</title>
   <link rel="stylesheet" type="text/css" href="../css/register.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="multiselect/jquery.multiselect.js"></script>
+  <link rel="stylesheet" href="multiselect/jquery.multiselect.css">
+  <script>
+    $('#langOpt').multiselect({
+    columns: 1,
+    placeholder: 'Category',
+    search: true,
+    });
+  </script>
 </head>
 <body>
   <div class="header">
@@ -13,8 +23,8 @@
 	
   <form method="post" action="post_register.php" enctype="multipart/form-data">
     <?php include('../common/errors.php'); ?>
-    <select name="categoryList[]" multiple="multiple">
-        <option value="">Categories</option>
+    <select name="categoryList[]" multiple id="langOpt" placeholder= 'Category'>
+        <option disabled selected> Category </option>
         <?php 
         foreach ($options as $option) {
         ?>

@@ -7,7 +7,25 @@
       $arr_categories = $result->fetch_all(MYSQLI_ASSOC);
     }
 ?>
+<head>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
+<script type="text/javascript">
+function delete_id(id)
+{
+     if(confirm('Sure To Remove This Record ?'))
+     {
+        window.location.href='delete.php?id='+id;
+     }
+}
+</script>
+<style>
+    .img-size {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+</head>
+<body>
 <table id="Ptb">
     <thead>
         <th>ID</th>
@@ -24,31 +42,45 @@
             <?php foreach($arr_categories as $cate) { ?>
                 <tr>
                     <td><?php echo $cate['id']; ?></td>
-                    <!-- <?php 
+                    <td>
+                    <?php 
                     require('../common/config.php');
-                    $cquery = "SELECT category_id FROM category_post where post_id = '".$cate['id']."' ";
-                    $cresult = mysqli_query($conn, $cquery);
-                    $arr_cid= mysqli_fetch_array($cresult);
+                    $cquery = "SELECT DISTINCT category_id FROM category_post where post_id = '".$cate['id']."' ";
+                    $cresult = $conn->query($cquery);
+                    $arr_cid= [];
+                    $i = 0;
+                    if ($cresult->num_rows > 0) {
+                        $arr_cid = $cresult->fetch_all();
+                      }
+                    // $arr_cid[] = array_unique($arr_cid);
                     foreach($arr_cid as $cid) {
-                        $sql = "SELECT category_name FROM categories where id = '".$cid."' ";
-                        $cname_result = mysqli_query($conn, $cname_result);
-                        $arr_cname = mysqli_fetch_array($cname_result);
+                        
+                        $sql = "SELECT category_name FROM categories where id = '".$cid[0]."' ";
+                        $cname_result = $conn->query($sql);
+                        $arr_cname = [];
+                        if ($cname_result->num_rows > 0) {
+                            $arr_cname = $cname_result->fetch_assoc();
+                          }
+                        
                         foreach($arr_cname as $cname) {
+                            
                     ?>
-                    <td><?php echo $cname; ?></td>
-                    <?php } } ?> -->
-                    <td><?php echo ""; ?></td>
+                    <?php echo $cname; ?>
+                    <?php } } ?></td>
+                    <td><img class="img-size" src="<?php echo $cate['image']; ?>"></td>
                     <td><?php echo $cate['title']; ?></td>
                     <td><?php echo $cate['body']; ?></td>
                     <td><?php echo $cate['created_date']; ?></td>
                     <td><?php echo $cate['updated_date']; ?></td>
-                    <td><a href="" > Edit </a></td>
+                    <td><a href="edit.php?id=<?php echo $cate['id']; ?>" > Edit </a> &nbsp; &nbsp;
+                    <a href="javascript:delete_id(<?php echo $cate['id']; ?>)">Delete</a> &nbsp; &nbsp;
+                    <a href="detail.php?id=<?php echo $cate['id']; ?>"> Details </a> </td>
                 </tr>
             <?php } ?>
         <?php } ?>
     </tbody>
 </table>
- 
+</body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
 <script>

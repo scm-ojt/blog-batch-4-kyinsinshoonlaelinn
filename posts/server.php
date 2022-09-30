@@ -77,5 +77,40 @@ if (isset($_POST['reg_post'])) {
     header('location: ../registration/index.php');
   }
 }
-  
+if (isset($_POST['edit_post'])) {
+  $target_dir = "../img/posts";
+                    $fileExt = explode('.',$_FILES['image']['name']);
+                    $fileActualExt = strtolower(end($fileExt));
+                    $image =  $target_dir. "/".uniqid(rand(), true).".".$fileActualExt;
+                    move_uploaded_file($_FILES['image']['tmp_name'], $image);
+
+  if(isset($_POST['categoryList'])) {
+   $categoryList = $_POST['categoryList'];
+  }
+  $title = mysqli_real_escape_string($db, $_POST['title']);
+  $body = mysqli_real_escape_string($db, $_POST['body']);
+
+  // form validation: ensure that the form is correctly filled ...
+  if (empty($categoryList)) { 
+    array_push($errors, "At least one category is required");  
+  }
+  if (empty($title)) { 
+    array_push($errors, "Title is required");  
+  }
+  if (empty($body)) { 
+    array_push($errors, "Description is required");   
+  }
+  if (count($errors) == 0) {
+    $dt = new DateTime("now", new DateTimeZone('Asia/Yangon'));
+    $updated_date = $dt->format('Y.m.d , h:i:s');
+    $query = "UPDATE posts SET image='".$image."', title='".$_POST['title']."', body='".$_POST['body']."', updated_date='".$updated_date."' WHERE id='".$_POST['id']."' ";
+  	mysqli_query($db, $query);
+    foreach ($_POST['categoryList'] as $cid) {
+    $cquery = "UPDATE category_post SET category_id='".$cid."' WHERE post_id='".$_POST['id']."' ";
+    mysqli_query($db, $cquery);
+    }
+    
+    header('location: ../posts/post.php');
+  }
+}
 ?>
