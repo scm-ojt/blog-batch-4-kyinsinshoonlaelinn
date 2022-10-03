@@ -1,6 +1,6 @@
-<?php include('server.php');
-require('../common/config.php'); 
-session_start(); 
+<?php
+    include('server.php'); 
+    session_start(); 
 
 if (!isset($_SESSION['email'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -13,12 +13,13 @@ if (isset($_GET['logout'])) {
 }
 $email = $_SESSION['email'];
 $query = "SELECT * FROM users WHERE email='$email'";
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($db, $query);
 $row = mysqli_fetch_assoc($result);
 
+    $cresult = mysqli_query($db,"SELECT * FROM comments WHERE id='" . $_GET['id'] . "'");
+    $comment = mysqli_fetch_assoc($cresult);
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,15 +66,16 @@ $row = mysqli_fetch_assoc($result);
     <div class="header">
   	    <h2>Write Comment</h2>
     </div>
-    <form method="post" action="create.php">
+    <form method="post" action="edit.php">
+        <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
         <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
-        <input type="hidden" name="post_id" value="<?php echo $_GET['post_id']; ?>" >
+        <!-- <input type="hidden" name="post_id" value="<?php echo $_GET['post_id']; ?>" > -->
         <div class="input-group">
   	        <label>Comment:</label>
-  	        <textarea name="body" rows="5" cols="49"><?php echo $body;?></textarea>
+  	        <textarea name="body" rows="5" cols="49"><?php echo $comment['body'];?></textarea>
   	    </div>
         <div class="input-group">
-  	        <button type="submit" class="btn" name="reg_cmt">Submit</button>
+  	        <button type="submit" class="btn" name="edit_cmt">Update</button>
   	    </div>
     </form>
 </body>

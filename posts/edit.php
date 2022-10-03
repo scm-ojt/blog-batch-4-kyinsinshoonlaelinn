@@ -25,7 +25,7 @@
   	<h2>Post Edit</h2>
   </div>
 	
-  <form method="post" action="edit.php" enctype="multipart/form-data">
+  <form method="post" action="edit.php?" enctype="multipart/form-data">
     <?php include('../common/errors.php'); ?>
     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
     <select name="categoryList[]" multiple id="langOpt" placeholder= 'Category'>
@@ -42,7 +42,7 @@
     <img class="img-size" src="<?php echo $row['image']; ?>">
   	<div class="">
   	  <label>Image Upload:</label>
-  	  <input type="file" name="image">
+  	  <input type="file" name="image" value="<?php echo $row['image']; ?>" >
   	</div>
   	<div class="input-group">
   	  <label>Title:</label>

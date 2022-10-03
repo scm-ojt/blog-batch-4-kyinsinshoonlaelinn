@@ -17,7 +17,7 @@
 	
   <form method="post" action="edit.php">
   	<?php include('../common/errors.php'); ?>
-    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+    
   	<div class="input-group">
   	  <label>Category Name</label>
   	  <input type="text" name="category_name" value="<?php echo $row['category_name']; ?>">

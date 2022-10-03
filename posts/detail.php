@@ -1,17 +1,22 @@
 <?php
-require_once('../common/config.php'); 
+require('../common/config.php'); 
 if(isset($_GET['id']))
 {
-    $query = "SELECT * FROM posts WHERE id =".$_GET['id'];
+    $query = "SELECT * FROM posts WHERE id ='".$_GET['id']."'";
     $result = mysqli_query($conn, $query);
     $arr_categories = mysqli_fetch_assoc($result);
     
+    $cquery = "SELECT * FROM comments WHERE posts_id ='".$_GET['id']."'";
+    $cresult = mysqli_query($conn, $cquery);
+    $comments = [];
+    $comments = mysqli_fetch_all($cresult);
 }
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Edit Post</title>
+  <title>Post Details</title>
   <!-- <link rel="stylesheet" type="text/css" href="../css/register.css"> -->
   <style>
     .img-size {
@@ -19,6 +24,15 @@ if(isset($_GET['id']))
         height: 400px;
     }
     </style>
+    <script>
+function delete_id(id)
+{
+     if(confirm('Sure To Remove This Record ?'))
+     {
+        window.location.href='../comment/delete.php?id='+id;
+     }
+}
+</script>
 </head>
 <body>
     <h1> <?php  echo $arr_categories['title']; ?> </h1>
@@ -52,6 +66,24 @@ if(isset($_GET['id']))
     <img class="img-size" src="<?php echo $arr_categories['image']; ?>">
     <br><br>
     <div> <?php echo $arr_categories['body']; ?> </div>
-    <a href="../comment/create.php"> Comment here </a>
+    <a href="../comment/create.php?post_id=<?php echo $arr_categories['id']; ?>"> Write Comment </a>
+    <table>
+        <thead>
+        <th> Comments </th>
+        <th> Actions </th>
+        </thead>
+        
+        <?php
+        foreach($comments as $cmt) { ?>
+        <tbody>
+            <td><?php echo $cmt[3] ; ?> </td>
+            <td><a href="../comment/edit.php?id=<?php echo $cmt[0]; ?>"> Edit </a> &nbsp; &nbsp;
+            <a href="javascript:delete_id(<?php echo $cmt[0]; ?>)">Delete</a> </td>
+        </tbody>
+        <?php }
+        ?>
+        
+    </table>   
+
 </body>
 </html>
