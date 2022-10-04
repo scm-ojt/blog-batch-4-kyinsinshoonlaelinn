@@ -1,4 +1,4 @@
-<?php
+<?php include('../common/nav.php');
 require('../common/config.php'); 
 if(isset($_GET['id']))
 {
@@ -17,6 +17,9 @@ if(isset($_GET['id']))
 <html>
 <head>
   <title>Post Details</title>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <!-- <link rel="stylesheet" type="text/css" href="../css/register.css"> -->
   <style>
     .img-size {
@@ -32,6 +35,12 @@ function delete_id(id)
         window.location.href='../comment/delete.php?id='+id;
      }
 }
+$(document).ready(function(){
+  $("#myBtn").hover(function(){
+    $(this).disabled = true;
+  });
+});
+
 </script>
 </head>
 <body>
@@ -77,10 +86,15 @@ function delete_id(id)
         foreach($comments as $cmt) { ?>
         <tbody>
             <td><?php echo $cmt[3] ; ?> </td>
-            <td><a href="../comment/edit.php?id=<?php echo $cmt[0]; ?>"> Edit </a> &nbsp; &nbsp;
+            <?php if($row['id'] != $cmt[2]) { ?>
+            <td><a style="pointer-events:none" href="../comment/edit.php?id=<?php echo $cmt[0]; ?>&user_id=<?php echo $cmt[2];?>"> Edit </a> &nbsp; &nbsp;
+            <a style="pointer-events:none" href="javascript:delete_id(<?php echo $cmt[0]; ?>)">Delete</a> </td>
+        <?php } else {?>
+            <td><a href="../comment/edit.php?id=<?php echo $cmt[0]; ?>&user_id=<?php echo $cmt[2];?>"> Edit </a> &nbsp; &nbsp;
             <a href="javascript:delete_id(<?php echo $cmt[0]; ?>)">Delete</a> </td>
+        <?php } ?>
         </tbody>
-        <?php }
+        <?php } 
         ?>
         
     </table>   

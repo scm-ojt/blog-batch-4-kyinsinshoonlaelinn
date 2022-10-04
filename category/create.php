@@ -1,4 +1,5 @@
-<?php include('server.php') ?>
+<?php include('../common/nav.php');
+include('server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>

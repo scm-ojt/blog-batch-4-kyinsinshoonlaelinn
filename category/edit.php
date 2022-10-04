@@ -1,4 +1,4 @@
-<?php 
+<?php include('../common/nav.php');
     include('server.php');
     require_once('../common/config.php'); 
     $result = mysqli_query($conn,"SELECT * FROM categories WHERE id='" . $_GET['id'] . "'");

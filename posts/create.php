@@ -1,5 +1,6 @@
-<?php include('server.php') ?>
-<?php include('../category/fetch_category.php') ?>
+<?php include('../common/nav.php');
+include('server.php');
+include('../category/fetch_category.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
   	<h2>Post Create</h2>
   </div>
 	
-  <form method="post" action="post_register.php" enctype="multipart/form-data">
+  <form method="post" action="create.php" enctype="multipart/form-data">
     <?php include('../common/errors.php'); ?>
     <select name="categoryList[]" multiple id="langOpt" placeholder= 'Category'>
         <option disabled selected> Category </option>
@@ -44,7 +45,7 @@
   	</div>
   	<div class="input-group">
   	  <label>Description:</label>
-  	  <textarea name="body" rows="5" cols="39"><?php echo $body;?></textarea>
+  	  <textarea name="body" rows="5" cols="32"><?php echo $body;?></textarea>
   	</div>
   	<div class="input-group">
   	  <button type="submit" class="btn" name="reg_post">Submit</button>

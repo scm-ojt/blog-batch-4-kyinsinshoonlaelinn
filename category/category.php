@@ -1,4 +1,4 @@
-<?php 
+<?php include('../common/nav.php');
     require_once('../common/config.php');
     $query = "SELECT * FROM categories";
     $result = $conn->query($query);
@@ -19,6 +19,8 @@ function delete_id(id)
 }
 </script>
 </head>
+<body>
+    <button style="margin-top:60px; color:#007bff;"><a style="text-decoration:none" href="../category/create.php"> New Category </a></button> <br><br>
 <table id="Ctb">
     <thead>
         <th>ID</th>
@@ -42,7 +44,8 @@ function delete_id(id)
         <?php } ?>
     </tbody>
 </table>
- 
+</body>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
 <script>
