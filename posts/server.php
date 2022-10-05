@@ -2,6 +2,7 @@
 session_start();
 
 // initializing variables
+$id = "";
 $categoryList = [];
 $image = "";
 $title    = "";
@@ -34,6 +35,8 @@ if (isset($_POST['reg_post'])) {
   }
   $title = mysqli_real_escape_string($db, $_POST['title']);
   $body = mysqli_real_escape_string($db, $_POST['body']);
+  $id = $_POST['id'];
+  print_r($id);
 
   // form validation: ensure that the form is correctly filled ...
   if (empty($categoryList)) { 
@@ -57,8 +60,8 @@ if (isset($_POST['reg_post'])) {
 
   //register user if there are no errors in the form
   if (count($errors) == 0) {
-    $query = "INSERT INTO posts (image, title, body, created_date) 
-  			  VALUES('$image', '$title', '$body', '$created_at')";
+    $query = "INSERT INTO posts (image, title, body, created_date, users_id) 
+  			  VALUES('$image', '$title', '$body', '$created_at', '$id')";
   	mysqli_query($db, $query);
     foreach ($categoryList as $cid) {
         $ss = "select last_insert_id() from posts";

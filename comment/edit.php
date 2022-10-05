@@ -41,7 +41,7 @@ $row = mysqli_fetch_assoc($result);
         <!-- <input type="hidden" name="post_id" value="<?php echo $_GET['post_id']; ?>" > -->
         <div class="input-group">
   	        <label>Comment:</label>
-  	        <textarea name="body" rows="5" cols="36"><?php echo $comment['body'];?></textarea>
+  	        <textarea name="body" rows="5" cols="33"><?php echo $comment['body'];?></textarea>
   	    </div>
         <div class="input-group">
   	        <button type="submit" class="btn" name="edit_cmt">Update</button>

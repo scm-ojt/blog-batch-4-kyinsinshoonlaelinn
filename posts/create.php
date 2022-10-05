@@ -24,6 +24,7 @@ include('../category/fetch_category.php') ?>
 	
   <form method="post" action="create.php" enctype="multipart/form-data">
     <?php include('../common/errors.php'); ?>
+    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
     <select name="categoryList[]" multiple id="langOpt" placeholder= 'Category'>
         <option disabled selected> Category </option>
         <?php 
@@ -37,7 +38,7 @@ include('../category/fetch_category.php') ?>
     <br><br>
   	<div class="">
   	  <label>Image Upload:</label>
-  	  <input type="file" name="image">
+  	  <input type="file" name="image" accept="image/png, image/gif, image/jpeg">
   	</div>
   	<div class="input-group">
   	  <label>Title:</label>
@@ -45,7 +46,7 @@ include('../category/fetch_category.php') ?>
   	</div>
   	<div class="input-group">
   	  <label>Description:</label>
-  	  <textarea name="body" rows="5" cols="32"><?php echo $body;?></textarea>
+  	  <textarea name="body" rows="5" cols="33"><?php echo $body;?></textarea>
   	</div>
   	<div class="input-group">
   	  <button type="submit" class="btn" name="reg_post">Submit</button>

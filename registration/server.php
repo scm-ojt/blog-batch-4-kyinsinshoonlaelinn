@@ -39,11 +39,11 @@ if (isset($_POST['reg_user'])) {
   $user = mysqli_fetch_assoc($result);
   
   if ($user) { // if user exists
-    if ($user['username'] === $username) {
+    if ($user['username'] == $username) {
       array_push($errors, "Username already exists");
     }
 
-    if ($user['email'] === $email) {
+    if ($user['email'] == $email) {
       array_push($errors, "email already exists");
     }
   }
@@ -79,7 +79,7 @@ if (isset($_POST['login_user'])) {
         if (mysqli_num_rows($results) == 1) {
           $_SESSION['email'] = $email;
           $_SESSION['success'] = ""; //You are now logged in
-          header('location: index.php');
+          header('location: ../posts/post.php');
         }else {
             array_push($errors, "Invalid email/password");
         }

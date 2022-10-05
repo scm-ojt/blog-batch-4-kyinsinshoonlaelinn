@@ -64,10 +64,6 @@
       }
       header('location: ../posts/post.php');
     }
-       
-        
-      
-    
 ?>
 <?php include('../category/fetch_category.php') ?>
 <!DOCTYPE html>
@@ -104,7 +100,7 @@
     <img class="img-size" src="<?php echo $row['image']; ?>">
   	<div class="">
   	  <label>Image Upload:</label>
-  	  <input type="file" name="image" value="<?php echo $row['image']; ?>" >
+  	  <input type="file" name="image" accept="image/png, image/gif, image/jpeg" value="<?php echo $row['image']; ?>" >
   	</div>
   	<div class="input-group">
   	  <label>Title:</label>
@@ -112,7 +108,7 @@
   	</div>
   	<div class="input-group">
   	  <label>Description:</label>
-  	  <textarea name="body" rows="5" cols="39"><?php echo $row['body'];?></textarea>
+  	  <textarea name="body" rows="5" cols="33"><?php echo $row['body'];?></textarea>
   	</div>
   	<div class="input-group">
   	  <button type="submit" class="btn" name="edit_post">Update</button>

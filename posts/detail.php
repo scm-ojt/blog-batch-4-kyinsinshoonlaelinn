@@ -20,7 +20,6 @@ if(isset($_GET['id']))
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <!-- <link rel="stylesheet" type="text/css" href="../css/register.css"> -->
   <style>
     .img-size {
         width: 500px;
@@ -44,7 +43,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-    <h1> <?php  echo $arr_categories['title']; ?> </h1>
+    <h1 style="margin-top:78px;"> <?php  echo $arr_categories['title']; ?> </h1>
     <ul>
         
             <?php 
@@ -75,7 +74,11 @@ $(document).ready(function(){
     <img class="img-size" src="<?php echo $arr_categories['image']; ?>">
     <br><br>
     <div> <?php echo $arr_categories['body']; ?> </div>
+    <?php if (isset($_SESSION['email'])) { ?>
     <a href="../comment/create.php?post_id=<?php echo $arr_categories['id']; ?>"> Write Comment </a>
+    <?php } else { ?>
+      <a href="../registration/login.php"> Write Comment </a>
+    <?php } ?>
     <table>
         <thead>
         <th> Comments </th>
@@ -85,14 +88,13 @@ $(document).ready(function(){
         <?php
         foreach($comments as $cmt) { ?>
         <tbody>
-            <td><?php echo $cmt[3] ; ?> </td>
-            <?php if($row['id'] != $cmt[2]) { ?>
-            <td><a style="pointer-events:none" href="../comment/edit.php?id=<?php echo $cmt[0]; ?>&user_id=<?php echo $cmt[2];?>"> Edit </a> &nbsp; &nbsp;
-            <a style="pointer-events:none" href="javascript:delete_id(<?php echo $cmt[0]; ?>)">Delete</a> </td>
-        <?php } else {?>
+            <td><?php echo $cmt[3] ; ?> </td> 
+            <?php if (isset($_SESSION['email'])) {
+              if($row['id'] == $cmt[2]) { ?>
+                
             <td><a href="../comment/edit.php?id=<?php echo $cmt[0]; ?>&user_id=<?php echo $cmt[2];?>"> Edit </a> &nbsp; &nbsp;
             <a href="javascript:delete_id(<?php echo $cmt[0]; ?>)">Delete</a> </td>
-        <?php } ?>
+        <?php } }?>
         </tbody>
         <?php } 
         ?>

@@ -1,10 +1,9 @@
 <?php 
   require('../common/config.php'); 
   session_start(); 
-
+  
   if (!isset($_SESSION['email'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
+  	//header('location: ../posts/post.php');
   }
   if (isset($_GET['logout'])) {
   	session_destroy();
@@ -24,6 +23,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+      $(document).ready(function(){
+        $("a").click(function() {
+          // remove classes from all
+          $("a").removeClass("active");
+          // add class to the one we clicked
+          $(this).addClass("active");
+        });
+      });
+    </script>
+    <style>
+      .active {
+        background-color: grey;
+      }
+    </style>
 </head>
 <body>
 
@@ -31,15 +45,15 @@
     <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card">
-    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="../posts/post.php" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <!-- <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
     <a href="../category/category.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Category</a>
     <a href="../posts/post.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Post List</a>
-    <?php  if (isset($_SESSION['email'])) : ?>
-    <a href="../registration/index.php?logout='1'" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Logout</a>
+    <?php  if (isset($_SESSION['email'])) { ?>
+    <a href="../registration/index.php?logout='1'" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LogOut</a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small"><?php echo $row['username'] ?></a>
-    <?php endif ?>
-    <!-- <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a> -->
+    <?php } else {?>
+      <a href="../registration/login.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
+    <?php } ?>
   </div>
 </div>
 
