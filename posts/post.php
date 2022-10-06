@@ -6,10 +6,6 @@
     if ($result->num_rows > 0) {
       $arr_categories = $result->fetch_all(MYSQLI_ASSOC);
     }
-    /* $cquery = "SELECT * FROM comments WHERE posts_id ='".$_GET['id']."'";
-    $cresult = mysqli_query($conn, $cquery);
-    $comments = [];
-    $comments = mysqli_fetch_all($cresult); */
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,8 +29,13 @@ function delete_id(id)
 </script>
 <style>
     .img-size {
-        width: 200px;
-        height: 200px;
+        width: 70px;
+        height: 70px;
+    }
+    .cate-btn {
+        border-radius: 25%;
+        background-color: grey;
+        color: #fff;
     }
     table.dataTable.table-striped tr.even {
     background-color: lightgray !important;
@@ -50,7 +51,7 @@ function delete_id(id)
   <div class="inner-div">
     <div class="gap"></div>
   <?php if (isset($_SESSION['email'])) { ?>
-  <button style="margin-top:36px; background-color: lightgray; box-shadow: 4px 4px;"><a style="text-decoration:none" href="../posts/create.php"> Add Post </a></button><br><br>
+    <button style="margin-top:36px; background-color: lightgray;"><i class="fa fa-plus-circle"></i><a style="text-decoration:none" href="../posts/create.php"> Add Post </a></button><br><br>
   <?php } ?>
 <table id="Ptb" class="table-striped">
     <thead>
@@ -59,8 +60,6 @@ function delete_id(id)
         <th>Photo</th>
         <th>Title</th>
         <th>Description</th>
-        <th>Created Date </th>
-        <th>Updated Date </th>
         <th>Action </th>
     </thead>
     <tbody>
@@ -80,7 +79,7 @@ function delete_id(id)
                       }
                     // $arr_cid[] = array_unique($arr_cid);
                     foreach($arr_cid as $cid) {
-                        
+                        echo '<button class="cate-btn">';
                         $sql = "SELECT category_name FROM categories where id = '".$cid[0]."' ";
                         $cname_result = $conn->query($sql);
                         $arr_cname = [];
@@ -92,17 +91,15 @@ function delete_id(id)
                             
                     ?>
                     <?php echo $cname; ?>
-                    <?php } } ?></td>
+                    <?php } echo '</button>'; } ?></td>
                     <td><img class="img-size" src="<?php echo $cate['image']; ?>"></td>
                     <td><?php echo $cate['title']; ?></td>
                     <td><?php echo $cate['body']; ?></td>
-                    <td><?php echo $cate['created_date']; ?></td>
-                    <td><?php echo $cate['updated_date']; ?></td>
                     <td>
                     <a href="detail.php?id=<?php echo $cate['id']; ?>"> <i class="fa fa-external-link" style="font-size:24px"></i></a> &nbsp; &nbsp;
                     <?php if (isset($_SESSION['email'])) { 
                         if($row['id'] == $cate['users_id']) { ?>
-                    <a href="edit.php?id=<?php echo $cate['id']; ?>" > <i class="fa fa-edit" style="font-size:24px"></i></a> &nbsp; &nbsp;
+                    <a href="edit.php?id=<?php echo $cate['id']; $_SESSION['post_id'] = $cate['id'] ?>" > <i class="fa fa-edit" style="font-size:24px"></i></a> &nbsp; &nbsp;
                     <a href="javascript:delete_id(<?php echo $cate['id']; ?>)"> <i class="fa fa-trash-o" style="font-size:25px;color:red"></i></a> 
                     <?php } }?>
                      </td>

@@ -1,13 +1,11 @@
-<?php include('../common/nav.php');
+<?php 
     include('server.php');
-    require('../common/config.php'); 
-    $result = mysqli_query($conn,"SELECT * FROM posts WHERE id='" . $_GET['id'] . "'");
-    $row= mysqli_fetch_array($result);
-    $cresult = $conn->query("SELECT category_id FROM category_post WHERE post_id='".$_GET['id']."'");
-    $cateList = [];
-    $cateList = $cresult->fetch_all();
-    if (isset($_POST['edit_post'])) {
-  
+    require('../common/config.php');  
+    /* $post_sid = $_SESSION['post_id'];
+    $post_id = $_GET['id']; */
+
+      if (isset($_POST['edit_post'])) {
+      
       $target_dir = "../img/posts";
                         $fileExt = explode('.',$_FILES['image']['name']);
                         $fileActualExt = strtolower(end($fileExt));
@@ -63,7 +61,7 @@
         
       }
       header('location: ../posts/post.php');
-    }
+      }
 ?>
 <?php include('../category/fetch_category.php') ?>
 <!DOCTYPE html>
@@ -71,6 +69,8 @@
 <head>
   <title>Edit Post</title>
   <link rel="stylesheet" type="text/css" href="../css/register.css">
+  <link rel="stylesheet" type="text/css" href="../css/example-styles.css">
+  <link rel="stylesheet" type="text/css" href="../css/demo-styles.css">
   <style>
     .img-size {
         width: 140px;
@@ -78,7 +78,17 @@
     }
 </style>
 </head>
+<?php include('../common/nav.php'); ?>
+<?php if($_SESSION['post_id'] == $_GET['id']) { 
+  
+  $result = mysqli_query($conn,"SELECT * FROM posts WHERE id='" . $_GET['id'] . "'");
+    $row= mysqli_fetch_array($result);
+    $cresult = $conn->query("SELECT category_id FROM category_post WHERE post_id='".$_GET['id']."'");
+    $cateList = [];
+    $cateList = $cresult->fetch_all();
+  ?>
 <body>
+
 <div class="header">
   	<h2>Post Edit</h2>
   </div>
@@ -86,8 +96,7 @@
   <form method="post" action="edit.php?id=<?php echo $row['id']?>" enctype="multipart/form-data">
     <?php include('../common/errors.php'); ?>
     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-    <select name="categoryList[]" multiple id="langOpt" placeholder= 'Category'>
-        <option disabled selected> Category </option>
+    <select id="categories" name="categoryList[]" multiple placeholder= 'Category'>
         <?php 
         foreach ($options as $option) {
         ?> 
@@ -114,5 +123,18 @@
   	  <button type="submit" class="btn" name="edit_post">Update</button>
   	</div>
   </form>
+  <script type="text/javascript" src="../js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.multi-select.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#categories').multiSelect();
+    });
+    </script>
 </body>
+<?php } else { 
+  header('location: ../common/access_denied.php');
+  /* <!-- <body> 
+    <p> You are not authorized to access this page. </p>
+  </body> --> */
+  } ?>
 </html>

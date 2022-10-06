@@ -16,8 +16,6 @@ $email = $_SESSION['email'];
 $query = "SELECT * FROM users WHERE email='$email'";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +25,6 @@ $row = mysqli_fetch_assoc($result);
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/register.css">
-  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="multiselect/jquery.multiselect.js"></script>
 </head>

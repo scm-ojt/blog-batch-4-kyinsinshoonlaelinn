@@ -13,15 +13,14 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
     <script type="text/javascript">
-function delete_id(id)
-{
-     if(confirm('Sure To Remove This Record ?'))
-     {
-        window.location.href='delete.php?id='+id;
-     }
-}
-
-</script>
+        function delete_id(id)
+        {
+            if(confirm('Sure To Remove This Record ?'))
+            {
+                window.location.href='delete.php?id='+id;
+            }
+        }
+    </script>
     <style>
          table.dataTable.table-striped tr.even {
             background-color: lightgray !important;
@@ -30,7 +29,7 @@ function delete_id(id)
 </head>
 <body>
     <div class="inner-div">
-    <button style="margin-top:60px; background-color: lightgray; box-shadow: 4px 4px;"><a style="text-decoration:none" href="../category/create.php"> New Category </a></button> <br><br>
+    <button style="margin-top:60px; background-color: lightgray;"><i class="fa fa-plus-circle"></i><a style="text-decoration:none" href="../category/create.php"> New Category </a></button> <br><br>
 <table id="Ctb" class="table-striped">
     <thead>
         <th>ID</th>

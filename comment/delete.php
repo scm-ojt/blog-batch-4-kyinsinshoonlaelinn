@@ -10,5 +10,4 @@ if(isset($_GET['id']))
 
     header("location: ../posts/detail.php?id=".urlencode($pid['posts_id']));
 }
- 
 ?>

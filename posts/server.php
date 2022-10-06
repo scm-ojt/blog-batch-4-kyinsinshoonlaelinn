@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // initializing variables
 $id = "";
@@ -17,9 +16,7 @@ $db = mysqli_connect('localhost', 'root', 'root', 'blog');
 // REGISTER POST
 if (isset($_POST['reg_post'])) {
   // receive all input values from the form
-  /* foreach ($_GET['categoryList'] as $value) {
-    $categoryList.= $value.", ";
-  } */
+
 
   $target_dir = "../img/posts";
                     $fileExt = explode('.',$_FILES['image']['name']);
@@ -27,9 +24,7 @@ if (isset($_POST['reg_post'])) {
                     $image =  $target_dir. "/".uniqid(rand(), true).".".$fileActualExt;
                     move_uploaded_file($_FILES['image']['tmp_name'], $image);
   
-  /* $filename = $_FILES["image"]["name"];
-  $tempname = $_FILES["image"]["tmp_name"];
-  $folder = "../img/posts/". $filename ; */
+
   if(isset($_POST['categoryList'])) {
    $categoryList = $_POST['categoryList'];
   }
@@ -51,12 +46,7 @@ if (isset($_POST['reg_post'])) {
   if (empty($body)) { 
     array_push($errors, "Description is required");   
   }
- /*  move_uploaded_file($tempname, $folder);
-  if (move_uploaded_file($filename, $folder)) {
-    echo "<h3>  Image uploaded successfully!</h3>";
-  } else {
-    echo "<h3>  Failed to upload image!</h3>";
-  } */
+
 
   //register user if there are no errors in the form
   if (count($errors) == 0) {
@@ -70,7 +60,6 @@ if (isset($_POST['reg_post'])) {
         $pid = $post_row['last_insert_id()'];
         $sql = "INSERT INTO category_post (post_id,category_id) VALUES ('$pid','$cid')";
         if(mysqli_query($db,$sql)){
-                // header("location:create.php");
                 echo "<p>category_post success</p>";
             }else{
                 echo "Query Fail : ".mysqli_error($conn);

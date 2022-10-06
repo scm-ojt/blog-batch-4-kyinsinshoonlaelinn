@@ -1,6 +1,6 @@
 <?php 
   require('../common/config.php'); 
-  session_start(); 
+  session_start();
   
   if (!isset($_SESSION['email'])) {
   	//header('location: ../posts/post.php');
@@ -37,6 +37,13 @@
       .active {
         background-color: grey;
       }
+      .custom-button {
+        width: 80px;
+      }
+      .nav-black {
+        color: #fff;
+        background-color: grey;
+      } 
     </style>
 </head>
 <body>
@@ -44,13 +51,17 @@
 <div class="">
     <!-- Navbar -->
 <div class="w3-top">
-  <div class="w3-bar w3-black w3-card">
+  <div class="w3-bar nav-black w3-card">
     <!-- <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
     <a href="../category/category.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Category</a>
     <a href="../posts/post.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Post List</a>
     <?php  if (isset($_SESSION['email'])) { ?>
-    <a href="../registration/index.php?logout='1'" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LogOut</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small"><?php echo $row['username'] ?></a>
+      <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-padding-large w3-button" title="More"><?php echo $row['username'] ?> <i class="fa fa-caret-down"></i></button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+          <a href="../registration/index.php?logout='1'" class="w3-bar-item w3-button">LogOut</a>
+        </div>
+      </div>
     <?php } else {?>
       <a href="../registration/login.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
     <?php } ?>
@@ -65,7 +76,5 @@
   <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
 </div>
 </div>
-
-		
 </body>
 </html>

@@ -1,21 +1,17 @@
-<?php include('../common/nav.php');
+<?php 
 include('server.php');
-include('../category/fetch_category.php') ?>
+include('../common/nav.php');
+include('../category/fetch_category.php') 
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Post Create</title>
   <link rel="stylesheet" type="text/css" href="../css/register.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="multiselect/jquery.multiselect.js"></script>
-  <link rel="stylesheet" href="multiselect/jquery.multiselect.css">
-  <script>
-    $('#langOpt').multiselect({
-    columns: 1,
-    placeholder: 'Category',
-    search: true,
-    });
-  </script>
+  <link rel="stylesheet" type="text/css" href="../css/example-styles.css">
+  <link rel="stylesheet" type="text/css" href="../css/demo-styles.css">
+
+  
 </head>
 <body>
   <div class="header">
@@ -25,8 +21,8 @@ include('../category/fetch_category.php') ?>
   <form method="post" action="create.php" enctype="multipart/form-data">
     <?php include('../common/errors.php'); ?>
     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-    <select name="categoryList[]" multiple id="langOpt" placeholder= 'Category'>
-        <option disabled selected> Category </option>
+    <select id="categories" name="categoryList[]" multiple placeholder= 'Category'>
+        
         <?php 
         foreach ($options as $option) {
         ?>
@@ -52,5 +48,13 @@ include('../category/fetch_category.php') ?>
   	  <button type="submit" class="btn" name="reg_post">Submit</button>
   	</div>
   </form>
+  <script type="text/javascript" src="../js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.multi-select.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#categories').multiSelect();
+    });
+    </script>
+
 </body>
 </html>

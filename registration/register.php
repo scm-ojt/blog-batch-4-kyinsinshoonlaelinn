@@ -31,7 +31,7 @@
   	  <input type="password" name="password_1">
   	</div>
   	<div class="input-group">
-  	  <label>Confirm password</label>
+  	  <label>Confirm Password</label>
   	  <input type="password" name="password_2" id="confirm">
   	</div>
   	<div class="input-group">
