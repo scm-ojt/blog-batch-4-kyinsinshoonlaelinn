@@ -43,7 +43,22 @@
       .nav-black {
         color: #fff;
         background-color: grey;
-      } 
+      }
+      img {
+        width: 68px;
+        height: 62px;
+      }
+      .margin {
+        margin-top: 15px;
+      }
+      .w3-bar-item-custom {
+        padding: 8px 1px;
+        float: left;
+        width: auto;
+        border: none;
+        display: block;
+        outline: 0;
+      }
     </style>
 </head>
 <body>
@@ -52,29 +67,24 @@
     <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar nav-black w3-card">
-    <!-- <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
-    <a href="../category/category.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Category</a>
-    <a href="../posts/post.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Post List</a>
+    <div class="inner-div">
+    <a href="../posts/post.php" class="w3-bar-item-custom"><img src="../img/logo3.png" alt="logo"></a>
+    <a href="../category/category.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small margin">CATEGORY</a>
+    <a href="../posts/post.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small margin">POST LIST</a>
     <?php  if (isset($_SESSION['email'])) { ?>
       <div class="w3-dropdown-hover w3-hide-small">
-        <button class="w3-padding-large w3-button" title="More"><?php echo $row['username'] ?> <i class="fa fa-caret-down"></i></button>
+        <button class="w3-padding-large w3-button margin" title="More"><?php echo $row['username'] ?> <i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
           <a href="../registration/index.php?logout='1'" class="w3-bar-item w3-button">LogOut</a>
         </div>
       </div>
     <?php } else {?>
-      <a href="../registration/login.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
+      <a href="../registration/login.php" class="w3-bar-item w3-button w3-padding-large w3-hide-small margin">LOGIN</a>
     <?php } ?>
+    </div>
   </div>
 </div>
 
-<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
-<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-  <a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Groups</a>
-  <a href="#tour" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">ALBUM</a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
-</div>
 </div>
 </body>
 </html>

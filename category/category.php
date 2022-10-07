@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         function delete_id(id)
         {
@@ -25,11 +28,14 @@
          table.dataTable.table-striped tr.even {
             background-color: lightgray !important;
         }
+        .margin-top {
+            margin-top: 100px;
+        }
     </style>
 </head>
 <body>
     <div class="inner-div">
-    <button style="margin-top:60px; background-color: lightgray;"><i class="fa fa-plus-circle"></i><a style="text-decoration:none" href="../category/create.php"> New Category </a></button> <br><br>
+    <a class="btn btn-info margin-top" href="../posts/create.php"><i class="fa fa-plus-circle"></i>  Add Category </a><br><br>
 <table id="Ctb" class="table-striped">
     <thead>
         <th>ID</th>
@@ -46,8 +52,8 @@
                     <td><?php echo $cate['category_name']; ?></td>
                     <td><?php echo $cate['created_date']; ?></td> 
                     <td><?php echo $cate['updated_date']; ?></td>
-                    <td><a href="edit.php?id=<?php echo $cate['id']; ?>"?> <i class="fa fa-edit" style="font-size:24px"></i></a> &nbsp; &nbsp;
-                    <a href="javascript:delete_id(<?php echo $cate['id']; ?>)"><i class="fa fa-trash-o" style="font-size:25px;color:red"></i></a></td>
+                    <td><a class="btn-sm btn-info" href="edit.php?id=<?php echo $cate['id']; ?>"?> <i class="fa fa-edit"></i> Edit</a>
+                    <a class="btn-sm btn-danger" href="javascript:delete_id(<?php echo $cate['id']; ?>)"><i class="fa fa-trash-o"></i> Delete</a></td>
                 </tr>
             <?php } ?>
         <?php } ?>

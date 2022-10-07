@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/> 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
 <script type="text/javascript">
 function delete_id(id)
@@ -37,6 +40,9 @@ function delete_id(id)
         background-color: grey;
         color: #fff;
     }
+    .margin-top {
+        margin-top: 36px;
+    }
     table.dataTable.table-striped tr.even {
     background-color: lightgray !important;
 }
@@ -51,7 +57,7 @@ function delete_id(id)
   <div class="inner-div">
     <div class="gap"></div>
   <?php if (isset($_SESSION['email'])) { ?>
-    <button style="margin-top:36px; background-color: lightgray;"><i class="fa fa-plus-circle"></i><a style="text-decoration:none" href="../posts/create.php"> Add Post </a></button><br><br>
+    <a class="btn btn-info margin-top" href="../posts/create.php"><i class="fa fa-plus-circle"></i>  Add Post </a><br><br>
   <?php } ?>
 <table id="Ptb" class="table-striped">
     <thead>
@@ -96,11 +102,11 @@ function delete_id(id)
                     <td><?php echo $cate['title']; ?></td>
                     <td><?php echo $cate['body']; ?></td>
                     <td>
-                    <a href="detail.php?id=<?php echo $cate['id']; ?>"> <i class="fa fa-external-link" style="font-size:24px"></i></a> &nbsp; &nbsp;
+                    <a class="btn-sm btn-success" href="detail.php?id=<?php echo $cate['id']; ?>"> <i class="fa fa-external-link" ></i> Detail</a> 
                     <?php if (isset($_SESSION['email'])) { 
                         if($row['id'] == $cate['users_id']) { ?>
-                    <a href="edit.php?id=<?php echo $cate['id']; $_SESSION['post_id'] = $cate['id'] ?>" > <i class="fa fa-edit" style="font-size:24px"></i></a> &nbsp; &nbsp;
-                    <a href="javascript:delete_id(<?php echo $cate['id']; ?>)"> <i class="fa fa-trash-o" style="font-size:25px;color:red"></i></a> 
+                    <a class="btn-sm btn-info" href="edit.php?id=<?php echo $cate['id']; $_SESSION['post_id'] = $cate['id'] ?>" > <i class="fa fa-edit"></i> Edit</a>
+                    <a class="btn-sm btn-danger" href="javascript:delete_id(<?php echo $cate['id']; ?>)"> <i class="fa fa-trash-o"></i> Delete</a> 
                     <?php } }?>
                      </td>
                 </tr>
